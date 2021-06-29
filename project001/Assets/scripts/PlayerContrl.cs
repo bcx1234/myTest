@@ -5,37 +5,44 @@ using UnityEngine;
 public class PlayerContrl : MonoBehaviour
 {
     // Start is called before the first frame update
+    private Rigidbody2D heroBody;
     public float MaxSpeed = 50, Moveforce = 100, JumpForce=100;
     private float fInput=0.0f;
-    private bool bFaceRight = true;
+    public bool bFaceRight = true;
     private bool bGrounded = false;
     Transform mGroundCheck;
     private bool bJump = false;
     void FixedUpdate()
     {
        
-        Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
+         
         //控制移动
-        if (fInput * rigidBody.velocity.x < MaxSpeed)
+        if (fInput * heroBody.velocity.x < MaxSpeed)
         {
-            rigidBody.AddForce(Vector2.right * fInput * Moveforce);
+            heroBody.AddForce(Vector2.right * fInput * Moveforce);
         }
         //限制最大速度
-        if (Mathf.Abs(rigidBody.velocity.x) > MaxSpeed)
+        if (Mathf.Abs(heroBody.velocity.x) > MaxSpeed)
         {
-            rigidBody.velocity = new Vector2(Mathf.Sign(rigidBody.velocity.x) * MaxSpeed, rigidBody.velocity.y);
+            heroBody.velocity = new Vector2(Mathf.Sign(heroBody.velocity.x) * MaxSpeed, heroBody.velocity.y);
         }
-        if (bJump)
+        if (bGrounded)
         {
-            rigidBody.AddForce(new Vector2(0f, JumpForce));
-            bJump = false;
+            bJump = Input.GetButtonDown("Jump");
+            if (bJump)
+            {
+                heroBody.AddForce(new Vector2(0f, JumpForce));
+                bJump = false;
+            }
+
         }
+        
 
     }
     void Start()
     {
         mGroundCheck = transform.Find("GroundCheck");
-
+        heroBody =  GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -51,11 +58,7 @@ public class PlayerContrl : MonoBehaviour
             flip();
         }
         bGrounded = Physics2D.Linecast(transform.position, mGroundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        if (bGrounded)
-        {
-            bJump=Input.GetButtonDown("Jump");
-
-        }
+        
         
     }
     void flip() 

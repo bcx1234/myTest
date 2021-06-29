@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\PlayerContrl.cs" />
+    <Compile Include="Assets\scripts\CameraFollow.cs" />
+    <Compile Include="Assets\scripts\Background.cs" />
+    <Compile Include="Assets\scripts\Gun.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -707,6 +710,14 @@
     <ProjectReference Include="Unity.2D.IK.Runtime.csproj">
       <Project>{0E6E1B79-DF2F-FDD7-81C3-D76138B3AE42}</Project>
       <Name>Unity.2D.IK.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{D45A6253-4C18-7DC0-ED0C-4D1839B11BDD}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{D9EBFD9E-4B92-6383-EDDC-325DC8FA2B3A}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Animation.Triangle.Runtime.csproj">
       <Project>{65584A99-DDB0-4A5B-5F30-D2A317A70203}</Project>
